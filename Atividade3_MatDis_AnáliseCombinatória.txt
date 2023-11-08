@@ -1,0 +1,106 @@
+// ATIVIDADE 3 //
+// MATEMATICA DISCRETA ADS //
+// Enviar apenas o arquivo.C (pode ser txt). Nao enviar word, pdf ou outra extensao.
+// Todos os integrantes do grupo devem enviar a mesma atividade feita pela equipe
+// Inserir o nome completo de todos os integrantes
+
+// NOME 1: 
+// NOME 2: 
+// NOME 3: 
+
+//////////////////////////////////////////////////////////////////////////
+///       FUNCAO PRINCIPAL A SER IMPLEMENTADA PELO GRUPO               ///
+///       FUNCAO RECEBE  os inteiros OPCAO, n                       ///
+///       FUNCAO IRA RETORNAR:                                        ///
+///               aproximacao do numero de Euler e - SE OPCAO 1    ///
+///               aproximacao do número de Euler pi - SE OPCAO 2        ///
+///               -1 - SE OUTRA   OPCAO                                  ///
+///////////////////////////////////////////////////////////////////
+
+#include <stdio.h>
+#include <math.h>
+
+
+double fatorial(int n) {
+    if (n > 0) {
+       double y = 1;
+        for (int k = 1; k <= n; k++) {
+            y = y * k;
+        }
+        return y;
+    } else if (n == 0) {
+        return 1;
+    } else {
+        return -1; // Valor padrão se a opção for inválida
+    }
+}
+
+double euler(int n) { /////EULER
+    if (n >= 0) {
+        double y = 0;
+        for (int k = 0; k <= n; k++) {
+            y += 1 / fatorial(k);
+        }
+        return y;
+    } else {
+        return -1; // Valor padrão se a opção for inválida
+    }
+}
+double pi(int n) { ////PI
+   if (n >= 0) {
+    double y = 0;
+    for (int k = 0; k <= n; k++) {
+        y += 8.0 / ((4 * k + 1) * (4 * k + 3));
+    }
+    return y;
+}   else {
+      return -1; // Valor padrão se a opção for inválida
+  }
+}
+  float aproximacao (int opcao,int n) {
+switch (opcao) {
+  case 1:
+  return euler(n);
+  case 2:
+  return pi(n);
+    default:
+  return -1;   // Valor padrão se a opção for inválida
+}
+
+}
+
+/////////////////////////
+/// CODIGO PARA TESTE ///
+////////////////////////
+int main ()
+{
+
+int opcao, n;
+
+printf ("***********************************************************\n");
+printf ("APROXIMACAO DAS CONSTANTES NUMERO DE EULER e PI\n");
+printf ("***********************************************************\n");
+
+    for (opcao = 1; opcao <= 3; opcao++)
+    {
+        if (opcao == 1)
+{
+for (n = 0; n <= 5; n++)
+{
+printf ("OPCAO %d: e(n = %d) = %f\n", opcao, n, aproximacao(opcao, n));    
+}
+}
+        else if (opcao == 2)
+{
+for (n = 0; n <= 5; n++)
+{
+printf ("OPCAO %d: pi(n = %d) = %f\n", opcao, n, aproximacao (opcao, n));    
+}
+}
+        else
+{
+printf ("OPCAO %d: OPERACAO INEXISTENTE", opcao);
+}
+    }
+return 0;
+}
