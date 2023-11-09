@@ -1,7 +1,7 @@
 # **Fatec
 ---
 
->Aqui está uma inventario dos trabalhos realizados na Fatec Arthur de Azevedo
+>Aqui está um inventario dos trabalhos realizados na Fatec Arthur de Azevedo
 ---
 ## **Matemática-discreta**
 Exercícios de matemática discreta 1º semestre Fatec Arthur Azevedo
