@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+void somav (int a,int b,int veta[a][b],int vetb[a][b])
+{
+int conta=0,contb=0;
+int soma[a][b],i,j;
+  for (  i=0 ;i < a ; i++) {
+    for ( j=0 ;j < b ; j++) {
+contb++;
+ soma[i][j]=veta[i][j]+vetb[i][j];
+    }
+    conta++;
+  }
+ for (  i=0 ;i < a ; i++) {
+    for (  j=0 ;j < b ; j++) {
+  
+
+       printf("%d |",soma[i][j]);
+    }
+    printf("\n");
+  }
+    
+  }
+
+
+
+
+  
+
+
+int main(void) {
+
+int a,b,i,j;
+  printf("Numeros de linhas e colunas do vetor a: ");
+   printf("\nLinha: ");
+  scanf("%d", &a);
+   printf("\nColunas: ");
+  scanf("%d",&b);
+
+  int veta[a][b] ;
+  for (  i=0 ;i < a ; i++) {
+    for ( j=0 ;j < b ; j++) {
+  
+  veta[i][j]=rand() % 10;
+       printf("%d |",veta[i][j]);
+    }
+    printf("\n");
+  }
+  a=0;
+  b=0;
+   printf("\n------------------------");
+  printf("Numeros de linhas e colunas do vetor b: ");
+   printf("\nLinha: ");
+  scanf("%d", &a);
+   printf("\nColunas: ");
+  scanf("%d",&b);
+
+  int vetb[a][b] ;
+  for (  i=0 ;i < a ; i++) {
+    for ( j=0 ;j < b ; j++) {
+
+  vetb[i][j]=rand() % 10;
+       printf("%d |",vetb[i][j]);
+    }
+    printf("\n");
+  }
+
+printf("\n------------------------\n");
+somav (a,b,veta,vetb);
+  return 0;
+
+}
