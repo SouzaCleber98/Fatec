@@ -1,0 +1,138 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+//////////////////////////////
+void somav (int al,int ac,int bl,int bc,int veta[al][ac],int vetb[bl][bc])
+{
+int soma[al][ac],i,j;
+if (al==bl && ac==bc) 
+{
+
+  for (   i=0 ;i < al ; i++) {
+    for ( j=0 ;j < bc ; j++) {
+
+ soma[i][j]=veta[i][j]+vetb[i][j];
+    }
+  
+  }
+}else{
+  printf("-1\n");
+
+  
+}
+ for (  i=0 ;i < al ; i++) {
+    for (  j=0 ;j < bc ; j++) {
+  
+
+       printf("%d |",soma[i][j]);
+    }
+    printf("\n");
+  }
+    
+  }
+////////////////////////////////////////////////////////
+  void subv (int al,int ac,int bl,int bc,int veta[al][ac],int vetb[bl][bc])
+  {
+  int sub[al][ac],i,j;
+  if (al==bl && ac==bc) 
+  {
+
+    for (   i=0 ;i < al ; i++) {
+      for ( j=0 ;j < bc ; j++) {
+
+   sub[i][j]=veta[i][j]-vetb[i][j];
+      }
+
+    }
+  }else{
+    printf("-1\n");
+
+
+  }
+   for (  i=0 ;i < al ; i++) {
+      for (  j=0 ;j < bc ; j++) {
+
+
+         printf("%d |",sub[i][j]);
+      }
+      printf("\n");
+    }
+
+    }
+  ///////////////////////////////////////////
+  
+void multv(int al, int ac, int bl, int bc, int veta[al][ac], int vetb[bl][bc]) {
+if (ac == bl) {
+  int res[al][bc];
+   for (int i = 0; i < al; i++) {
+      for (int j = 0; j < bc; j++) {
+  res[i][j] = 0;
+          for (int k = 0; k < ac; k++) {
+res[i][j] += veta[i][k] * vetb[k][j];
+                }
+            }
+        }
+  for (  int i=0 ;i < al ; i++) {
+    for ( int j=0 ;j < bc ; j++) {
+
+
+       printf("%d |",res[i][j]);
+    }
+    printf("\n");
+  }
+    } else {
+       
+        printf("-1\n");
+    }
+}
+
+
+
+  
+
+
+int main(void) {
+
+int a,b,i,j,al,ac,bl,bc;
+  printf("Numeros de linhas e colunas do vetor a: ");
+   printf("\nLinha: ");
+  scanf("%d", &a);
+   printf("\nColunas: ");
+  scanf("%d",&b);
+
+  int veta[a][b] ;
+  for (  i=0 ;i < a ; i++) {
+    for ( j=0 ;j < b ; j++) {
+  
+  veta[i][j]=rand() % 10;
+       printf("%d |",veta[i][j]);
+    }
+    printf("\n");
+  }
+  al=a;
+  ac=b;
+  a=0;
+  b=0;
+   printf("\n------------------------");
+  printf("Numeros de linhas e colunas do vetor b: ");
+   printf("\nLinha: ");
+  scanf("%d", &a);
+   printf("\nColunas: ");
+  scanf("%d",&b);
+
+  int vetb[a][b] ;
+  for (  i=0 ;i < a ; i++) {
+    for ( j=0 ;j < b ; j++) {
+
+  vetb[i][j]=rand() % 10;
+       printf("%d |",vetb[i][j]);
+    }
+    printf("\n");
+  }
+bl=a;
+bc=b;
+printf("\n------------------------\n");
+multv(al,ac,bl,bc,veta,vetb);
+
+}
