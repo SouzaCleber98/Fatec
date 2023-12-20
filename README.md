@@ -13,4 +13,5 @@ Exercícios de matemática discreta 1º semestre Fatec Arthur Azevedo
 
 * exercício 3 6/11
 
+* exercício 4 28/11
 ---

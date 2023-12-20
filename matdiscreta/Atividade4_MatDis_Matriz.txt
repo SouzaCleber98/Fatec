@@ -1,138 +1,391 @@
 #include <stdio.h>
 #include <stdlib.h>
+// ATIVIDADE 4 //
+// MATEMATICA DISCRETA ADS //
+// Enviar apenas o arquivo.C (pode ser txt). Nao enviar word, pdf ou outra extensao.
+// Todos os integrantes do grupo devem enviar a mesma atividade feita pela equipe
+// Inserir o nome completo de todos os integrantes
 
+// NOME 1: 
+// NOME 2: 
+// NOME 3: 
 
 //////////////////////////////
-void somav (int al,int ac,int bl,int bc,int veta[al][ac],int vetb[bl][bc])
-{
-int soma[al][ac],i,j;
-if (al==bl && ac==bc) 
-{
+void pergunta(int *al, int *ac, int *bl, int *bc) {
+    int a, b;
+    printf("Numeros de linhas e colunas do vetor a: ");
+    printf("\nLinha: ");
+    scanf("%d", &a);
+    printf("\nColunas: ");
+    scanf("%d", &b);
 
-  for (   i=0 ;i < al ; i++) {
-    for ( j=0 ;j < bc ; j++) {
+    *al = a;
+    *ac = b;
 
- soma[i][j]=veta[i][j]+vetb[i][j];
-    }
-  
-  }
-}else{
-  printf("-1\n");
-
-  
+    printf("\n------------------------");
+    printf("\nNumeros de linhas e colunas do vetor b: ");
+    printf("\nLinha: ");
+    scanf("%d", &a);
+    printf("\nColunas: ");
+    scanf("%d", &b);
+    *bl = a;
+    *bc = b;
 }
- for (  i=0 ;i < al ; i++) {
-    for (  j=0 ;j < bc ; j++) {
-  
 
-       printf("%d |",soma[i][j]);
+/////////////////////////////
+void somav(int al, int ac, int bl, int bc, int **veta, int **vetb) {
+    int **soma = malloc(al * sizeof(int *));
+    for (int i = 0; i < al; i++) {
+        soma[i] = malloc(bc * sizeof(int));
     }
-    printf("\n");
-  }
-    
-  }
+
+    int i, j;
+    if (al == bl && ac == bc) {
+        for (i = 0; i < al; i++) {
+            for (j = 0; j < bc; j++) {
+                soma[i][j] = veta[i][j] + vetb[i][j];
+            }
+        }
+    } else {
+        printf("-1\n");
+        return;
+    }
+    for (i = 0; i < al; i++) {
+        for (j = 0; j < bc; j++) {
+            printf("%d |", soma[i][j]);
+        }
+        printf("\n");
+    }
+
+   
+    for (i = 0; i < al; i++) {
+        free(soma[i]);
+    }
+    free(soma);
+}
+
 ////////////////////////////////////////////////////////
-  void subv (int al,int ac,int bl,int bc,int veta[al][ac],int vetb[bl][bc])
-  {
-  int sub[al][ac],i,j;
-  if (al==bl && ac==bc) 
-  {
-
-    for (   i=0 ;i < al ; i++) {
-      for ( j=0 ;j < bc ; j++) {
-
-   sub[i][j]=veta[i][j]-vetb[i][j];
-      }
-
-    }
-  }else{
-    printf("-1\n");
-
-
-  }
-   for (  i=0 ;i < al ; i++) {
-      for (  j=0 ;j < bc ; j++) {
-
-
-         printf("%d |",sub[i][j]);
-      }
-      printf("\n");
+void subv(int al, int ac, int bl, int bc, int **veta, int **vetb) {
+    int **sub = malloc(al * sizeof(int *));
+    for (int i = 0; i < al; i++) {
+        sub[i] = malloc(bc * sizeof(int));
     }
 
+    int i, j;
+    if (al == bl && ac == bc) {
+        for (i = 0; i < al; i++) {
+            for (j = 0; j < bc; j++) {
+                sub[i][j] = veta[i][j] - vetb[i][j];
+            }
+        }
+    } else {
+        printf("-1\n");
+        return;
     }
-  ///////////////////////////////////////////
-  
-void multv(int al, int ac, int bl, int bc, int veta[al][ac], int vetb[bl][bc]) {
-if (ac == bl) {
-  int res[al][bc];
-   for (int i = 0; i < al; i++) {
-      for (int j = 0; j < bc; j++) {
-  res[i][j] = 0;
-          for (int k = 0; k < ac; k++) {
-res[i][j] += veta[i][k] * vetb[k][j];
+    for (i = 0; i < al; i++) {
+        for (j = 0; j < bc; j++) {
+            printf("%d |", sub[i][j]);
+        }
+        printf("\n");
+    }
+
+   
+    for (i = 0; i < al; i++) {
+        free(sub[i]);
+    }
+    free(sub);
+}
+
+///////////////////////////////////////////
+void multv(int al, int ac, int bl, int bc, int **veta, int **vetb) {
+    if (ac == bl) {
+        int **res = malloc(al * sizeof(int *));
+        for (int i = 0; i < al; i++) {
+            res[i] = malloc(bc * sizeof(int));
+        }
+
+        for (int i = 0; i < al; i++) {
+            for (int j = 0; j < bc; j++) {
+                res[i][j] = 0;
+                for (int k = 0; k < ac; k++) {
+                    res[i][j] += veta[i][k] * vetb[k][j];
                 }
             }
         }
-  for (  int i=0 ;i < al ; i++) {
-    for ( int j=0 ;j < bc ; j++) {
+        for (int i = 0; i < al; i++) {
+            for (int j = 0; j < bc; j++) {
+                printf("%d |", res[i][j]);
+            }
+            printf("\n");
+        }
 
-
-       printf("%d |",res[i][j]);
-    }
-    printf("\n");
-  }
-    } else {
        
+        for (int i = 0; i < al; i++) {
+            free(res[i]);
+        }
+        free(res);
+    } else {
         printf("-1\n");
     }
 }
 
+/////////////////////////////////////////////
+double determinante(int n, int **veta) {
+    if (n == 1) {
+        return veta[0][0];
+    }
+
+    if (n == 2) {
+        return veta[0][0] * veta[1][1] - veta[0][1] * veta[1][0];
+    }
+
+    double det = 0;  
+
+    for (int c = 0; c < n; c++) {
+        int submat_col = 0;
+        int submat_size = n - 1;
+        int **submat = malloc(submat_size * sizeof(int *));
+
+        for (int i = 1; i < n; i++) {
+            submat[i - 1] = malloc(submat_size * sizeof(int));
+            for (int j = 0, submat_j = 0; j < n; j++) {
+                if (j == c) {
+                    continue;
+                }
+                submat[i - 1][submat_j++] = veta[i][j];
+            }
+        }
+
+        int sign = (c % 2 == 0) ? 1 : -1;
+        det += sign * veta[0][c] * determinante(submat_size, submat);
+
+        
+        for (int i = 0; i < submat_size; i++) {
+            free(submat[i]);
+        }
+        free(submat);
+    }
+
+    return det;
+}
 
 
-  
-
-
+/////////////////////////
+/// CODIGO PARA TESTE ///
+////////////////////////
+/////////////////////////////////////////////
 int main(void) {
+    int al, ac, bl, bc, i, j, a, b, opcao;
+    printf("Menu de operações com matrizes \n");
+    printf("1 - Soma\n");
+    printf("2 - Subtração\n");
+    printf("3 - Multiplicação\n");
+    printf("4 - Determinante\n");
+    printf("5 - Sair\n");
 
-int a,b,i,j,al,ac,bl,bc;
-  printf("Numeros de linhas e colunas do vetor a: ");
-   printf("\nLinha: ");
-  scanf("%d", &a);
-   printf("\nColunas: ");
-  scanf("%d",&b);
+    int **veta, **vetb; 
 
-  int veta[a][b] ;
-  for (  i=0 ;i < a ; i++) {
-    for ( j=0 ;j < b ; j++) {
+    do {
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+        case 1:
+            printf("Soma\n");
+            pergunta(&al, &ac, &bl, &bc);
+            printf("\n------------------------\n");
+            printf("Vetor a:\n");
+
+           
+            veta = malloc(al * sizeof(int *));
+            for (i = 0; i < al; i++) {
+                veta[i] = malloc(ac * sizeof(int));
+            }
+
+            for (i = 0; i < al; i++) {
+                for (j = 0; j < ac; j++) {
+                    veta[i][j] = rand() % 10;
+                    printf("%d |", veta[i][j]);
+                }
+                printf("\n");
+            }
+            printf("\n------------------------");
+            printf("\nVetor b:\n");
+
+           
+            vetb = malloc(bl * sizeof(int *));
+            for (i = 0; i < bl; i++) {
+                vetb[i] = malloc(bc * sizeof(int));
+            }
+
+            for (i = 0; i < bl; i++) {
+                for (j = 0; j < bc; j++) {
+                    vetb[i][j] = rand() % 10;
+                    printf("%d |", vetb[i][j]);
+                }
+                printf("\n");
+            }
+            printf("\n------------------------\n");
+            printf("Vetor a + b:\n");
+            somav(al, ac, bl, bc, veta, vetb);
+
+        
+            for (i = 0; i < al; i++) {
+                free(veta[i]);
+            }
+            free(veta);
+
+            for (i = 0; i < bl; i++) {
+                free(vetb[i]);
+            }
+            free(vetb);
+            break;
+
+        case 2:
+            printf("Subtração\n");
+            pergunta(&al, &ac, &bl, &bc);
+            printf("\n------------------------\n");
+            printf("Vetor a:\n");
+
+         
+            veta = malloc(al * sizeof(int *));
+            for (i = 0; i < al; i++) {
+                veta[i] = malloc(ac * sizeof(int));
+            }
+
+            for (i = 0; i < al; i++) {
+                for (j = 0; j < ac; j++) {
+                    veta[i][j] = rand() % 10;
+                    printf("%d |", veta[i][j]);
+                }
+                printf("\n");
+            }
+            printf("\n------------------------");
+            printf("\nVetor b:\n");
+
+            
+            vetb = malloc(bl * sizeof(int *));
+            for (i = 0; i < bl; i++) {
+                vetb[i] = malloc(bc * sizeof(int));
+            }
+
+            for (i = 0; i < bl; i++) {
+                for (j = 0; j < bc; j++) {
+                    vetb[i][j] = rand() % 10;
+                    printf("%d |", vetb[i][j]);
+                }
+                printf("\n");
+            }
+            printf("\n------------------------\n");
+            printf("Vetor a - b:\n");
+            subv(al, ac, bl, bc, veta, vetb);
+
+       
+            for (i = 0; i < al; i++) {
+                free(veta[i]);
+            }
+            free(veta);
+
+            for (i = 0; i < bl; i++) {
+                free(vetb[i]);
+            }
+            free(vetb);
+            break;
+
+        case 3:
+            printf("Multiplicação\n");
+            pergunta(&al, &ac, &bl, &bc);
+            printf("\n------------------------\n");
+            printf("Vetor a:\n");
+
+           
+            veta = malloc(al * sizeof(int *));
+            for (i = 0; i < al; i++) {
+                veta[i] = malloc(ac * sizeof(int));
+            }
+
+            for (i = 0; i < al; i++) {
+                for (j = 0; j < ac; j++) {
+                    veta[i][j] = rand() % 10;
+                    printf("%d |", veta[i][j]);
+                }
+                printf("\n");
+            }
+            printf("\n------------------------");
+            printf("\nVetor b:\n");
+
+      
+            vetb = malloc(bl * sizeof(int *));
+            for (i = 0; i < bl; i++) {
+                vetb[i] = malloc(bc * sizeof(int));
+            }
+
+            for (i = 0; i < bl; i++) {
+                for (j = 0; j < bc; j++) {
+                    vetb[i][j] = rand() % 10;
+                    printf("%d |", vetb[i][j]);
+                }
+                printf("\n");
+            }
+            printf("\n------------------------\n");
+            printf("Vetor a * b:\n");
+            multv(al, ac, bl, bc, veta, vetb);
+
+         
+            for (i = 0; i < al; i++) {
+                free(veta[i]);
+            }
+            free(veta);
+
+            for (i = 0; i < bl; i++) {
+                free(vetb[i]);
+            }
+            free(vetb);
+            break;
+
+          case 4:
+          printf("Determinante\n");
+          printf("Coloque o tamanho da matriz quadrada: ");
+          scanf("%d", &a);
+
+       
+          int **veta = malloc(a * sizeof(int *));
+          for (i = 0; i < a; i++) {
+              veta[i] = malloc(a * sizeof(int));
+          }
+
+         
+          printf("\nMatriz:\n");
+          for (i = 0; i < a; i++) {
+              for (j = 0; j < a; j++) {
+                  veta[i][j] = rand() % 10;
+                  printf("%d |", veta[i][j]);
+              }
+              printf("\n");
+          }
+
   
-  veta[i][j]=rand() % 10;
-       printf("%d |",veta[i][j]);
-    }
-    printf("\n");
-  }
-  al=a;
-  ac=b;
-  a=0;
-  b=0;
-   printf("\n------------------------");
-  printf("Numeros de linhas e colunas do vetor b: ");
-   printf("\nLinha: ");
-  scanf("%d", &a);
-   printf("\nColunas: ");
-  scanf("%d",&b);
+          printf("\nDeterminante: %.2f\n", determinante(a, veta));
 
-  int vetb[a][b] ;
-  for (  i=0 ;i < a ; i++) {
-    for ( j=0 ;j < b ; j++) {
+          
+          for (i = 0; i < a; i++) {
+              free(veta[i]);
+          }
+          free(veta);
+          break;
 
-  vetb[i][j]=rand() % 10;
-       printf("%d |",vetb[i][j]);
-    }
-    printf("\n");
-  }
-bl=a;
-bc=b;
-printf("\n------------------------\n");
-multv(al,ac,bl,bc,veta,vetb);
 
+
+          
+
+        case 5:
+            printf("Encerrando o programa.\n");
+            break;
+
+        default:
+            printf("Opção inválida. Tente novamente.\n");
+        }
+    } while (opcao != 5);
+
+    return 0;
 }
